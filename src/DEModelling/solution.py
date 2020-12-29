@@ -7,6 +7,7 @@ from scikits.odes import ode
 from scikits.odes.sundials import CVODESolveFailed, CVODESolveFoundRoot, CVODESolveReachedTSTOP
 from scikits.odes.sundials.cvode import StatusEnum
 
+import numpy as np
 
 def ode_system_1_var(*, x):
     """
@@ -19,9 +20,10 @@ def ode_system_1_var(*, x):
                 RHS of the ODE equations
                 Inputs are passed by Sundials.
                 """
-
         x = params[ODEIndex.x]
         xdot = params[ODEIndex.xdot]
+
+
 
         # First order derivative functions
         deriv_x, x_i = model_x_deriv_func(xdot=xdot)  # x_i is implemented in later ode systems as an example of tracking internal data.
@@ -32,29 +34,26 @@ def ode_system_1_var(*, x):
     return rhs_equation
 
 
-def calc_numerical_solution(*, initial_conditions, solver_config, time, tstop):
+def calc_numerical_solution(*, initial_conditions, time, tstop):
     """
     Run the sundials ODE solver on the set of differential equations
     """
 
     # initialise the differential equation model
     system = ode_system_1_var(
-        x=initial_conditions.ode_init_con[InitConIndex.x],
+        x=initial_conditions[InitConIndex.x],
     )
 
     # Create the sundials system
     solver = ode(
         'cvode', system,
         old_api=False,
-        rtol=solver_config.relative_tolerance,
-        atol=solver_config.absolute_tolerance,
-        max_steps=solver_config.max_steps,
         tstop=tstop,
     )
-
+    time = np.linspace(time, tstop, int(1000))
     # and solve it.
     try:
-        soln = solver.solve(time, initial_conditions.ode_init_con)
+        soln = solver.solve(time, initial_conditions)
     except CVODESolveFailed as e:
         soln = e.soln
         print("Solver: FAILED at time {} with conditions {}".format(soln.values.t[-1], soln.values.y[-1, :]))
