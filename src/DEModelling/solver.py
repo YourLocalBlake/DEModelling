@@ -6,14 +6,15 @@ from DEModelling.initialiser import ode_system_1_var
 from DEModelling.utils import InitConIndex
 
 
-def calc_numerical_solution(*, initial_conditions, time, tstop):
+def calc_numerical_solution(*, model, initial_conditions, time, tstop):
     """
     Run the sundials ODE solver on the set of differential equations
     """
-
+    # print("calc num got", model)
     # initialise the differential equation model
     system = ode_system_1_var(
         x=initial_conditions[InitConIndex.x],
+        model=model
     )
 
     # Create the sundials system
