@@ -1,15 +1,14 @@
 # Main file currently used for calling models.
 
-from DEModelling.solution import calc_numerical_solution
+from DEModelling.solver import calc_numerical_solution
 from numpy import linspace
-from DEModelling.utils import ODEIndex
 
 import matplotlib.pyplot as plt
 
-time_start = 1
+time_start = 0
 time_end = 20
 num_points = 1000
-initial_x = 1
+initial_x = 0
 inital_xdot = 1
 initial_conditions = [initial_x, inital_xdot]
 

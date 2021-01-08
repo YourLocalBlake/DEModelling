@@ -36,3 +36,9 @@ class InitConIndex(IntEnum):
     ydot = 3
     z = 4
     zdot = 5
+
+def get_model():
+    """ Returns the selected model.
+    """
+
+    return None
