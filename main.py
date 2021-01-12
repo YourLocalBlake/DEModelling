@@ -12,8 +12,6 @@ initial_x = 1
 initial_xdot = 1  # unused for first order DEs.
 initial_conditions = [initial_x, initial_xdot]
 
-models = ["x", "x2", "x3", "const_1", "const_2", "2x"]
-
 
 sol = calc_numerical_solution(model=models[0], initial_conditions=initial_conditions, time=time_start, tstop=time_end)
 

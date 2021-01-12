@@ -2,7 +2,7 @@ import numpy as np
 from scikits.odes import ode
 from scikits.odes.sundials import CVODESolveFailed, CVODESolveFoundRoot, CVODESolveReachedTSTOP
 
-from DEModelling.initialiser import ode_system_1_var
+from DEModelling.initialiser import ode_system
 from DEModelling.utils import InitConIndex
 
 
@@ -12,7 +12,7 @@ def calc_numerical_solution(*, model, initial_conditions, time, tstop):
     """
     # print("calc num got", model)
     # initialise the differential equation model
-    system = ode_system_1_var(
+    system = ode_system(
         x=initial_conditions[InitConIndex.x],
         model=model
     )
