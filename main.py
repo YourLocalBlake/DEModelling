@@ -1,7 +1,7 @@
 # Main file currently used for calling models.
 import numpy as np
 from DEModelling.solver import solve_model
-from DEModelling.data_format import ConfigParams
+from DEModelling.data_format import ConfigParams, InitialConditions
 from DEModelling.utils import ODEIndex
 
 
@@ -19,7 +19,12 @@ initial_x2ddot = 0
 initial_x3 = 3
 initial_x3dot = 0
 initial_x3ddot = 0
-initial_conditions = [initial_x1, initial_x1dot, initial_x1ddot, initial_x2, initial_x2dot, initial_x2ddot, initial_x3, initial_x3dot, initial_x3ddot]
+
+init_con = InitialConditions(
+    init_x1=initial_x1,
+    init_x2=initial_x2,
+    init_x3=initial_x3
+)
 
 solver_config = ConfigParams(
     start=time_start,
@@ -31,9 +36,10 @@ solver_config = ConfigParams(
     enable_tstop = 0,
     tstop_times = [0]
 )
+print(init_con.ode_init_con)
 
 
-soln, soln_t, soln_flag, internal_data = solve_model(initial_conditions=initial_conditions, solver_config=solver_config, save_data=False, folder_name="DEModelling_test")
+soln, soln_t, soln_flag, internal_data = solve_model(initial_conditions=init_con, solver_config=solver_config, save_data=False, folder_name="DEModelling_test")
 
 # y_points = [i[0] for i in sol.values.y]
 # ydot_points = [i[1] for i in sol.values.y]

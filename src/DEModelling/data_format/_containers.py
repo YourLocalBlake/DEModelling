@@ -10,14 +10,19 @@ class InitialConditions:
     """
     Datastructure for the initial conditions of the system and ODE
     """
-    mass_r = attr.ib()
-    equ_radius = attr.ib()
-    ode_init_con = attr.ib(default=attr.Factory(list))
-    after_tstop_params = attr.ib(default=attr.Factory(list))
-    @ode_init_con.validator
-    def check(self, attribute, values):
-        if len(values) != 10:
-            raise RuntimeError("ODE requires 10 initial conditions, {} were given".format(len(self.ode_init_con)))
+    init_x1 = attr.ib(default=0, type=attr.Factory(int))
+    init_x1dot = attr.ib(default=0, type=attr.Factory(int))
+    init_x1ddot = attr.ib(default=0, type=attr.Factory(int))
+    init_x2 = attr.ib(default=0, type=attr.Factory(int))
+    init_x2dot = attr.ib(default=0, type=attr.Factory(int))
+    init_x2ddot = attr.ib(default=0, type=attr.Factory(int))
+    init_x3 = attr.ib(default=0, type=attr.Factory(int))
+    init_x3dot = attr.ib(default=0, type=attr.Factory(int))
+    init_x3ddot = attr.ib(default=0, type=attr.Factory(int))
+    ode_init_con = attr.ib(init=False, default=attr.Factory(list))
+
+    def __attrs_post_init__(self):
+        self.ode_init_con = [self.init_x1, self.init_x1dot, self.init_x1ddot, self.init_x2, self.init_x2dot, self.init_x2ddot, self.init_x3, self.init_x3dot, self.init_x3ddot] # Order corresponds to order of ENum.
 
 
 @attr.s

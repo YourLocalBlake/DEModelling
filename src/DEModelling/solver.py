@@ -15,7 +15,7 @@ def solve_model(*, initial_conditions, solver_config, save_data, folder_name):
     # Initialise the time over which to solve the system
     time = np.linspace(solver_config.start, solver_config.stop, int(solver_config.num_time))
     # Calculate the solution to the problem.
-    soln, internal_data = calc_numerical_solution(initial_conditions=initial_conditions, solver_config=solver_config,
+    soln, internal_data = calc_numerical_solution(initial_conditions=initial_conditions.ode_init_con, solver_config=solver_config,
                                                   time=time)
     internal_data = [0]
     soln_y = soln.values.y
