@@ -47,24 +47,20 @@ def solution_loader(file_name=None):
             params=f["internal_data"]["params"][:],
             derivs=f["internal_data"]["derivs"][:],
             times=f["internal_data"]["times"][:],
-            a1=f["internal_data"]["a1"][:],
-            a1dot=f["internal_data"]["a1dot"][:],
-            a2=f["internal_data"]["a2"][:],
-            a2dot=f["internal_data"]["a2dot"][:],
-            a3=f["internal_data"]["a3"][:],
-            a3dot=f["internal_data"]["a3dot"][:],
-            θ=f["internal_data"]["θ"][:],
-            θdot=f["internal_data"]["θdot"][:],
-            ϕ=f["internal_data"]["ϕ"][:],
-            ϕdot=f["internal_data"]["ϕdot"][:],
+            x1=f["internal_data"]["x1"][:],
+            x1dot=f["internal_data"]["x1dot"][:],
+            x1ddot=f["internal_data"]["x1ddot"][:],
+            x2=f["internal_data"]["x2"][:],
+            x2dot=f["internal_data"]["x2dot"][:],
+            x2ddot=f["internal_data"]["x2ddot"][:],
+            x3=f["internal_data"]["x3"][:],
+            x3dot=f["internal_data"]["x3dot"][:],
+            x3ddot=f["internal_data"]["x3ddot"][:],
             problems=f["internal_data"].attrs["problems"]
         )
 
         initial_conditions = InitialConditions(
             ode_init_con=f["initial_conditions"]["ode_initial_conditions"][:],
-            ρ_real_over_ρ_tides=f["initial_conditions"].attrs["ρ_real_over_ρ_tides"],
-            ρ_pressure_over_ρ_tides=f["initial_conditions"].attrs["ρ_pressure_over_ρ_tides"],
-            ρ_real_over_ρ_pressure=f["initial_conditions"].attrs["ρ_real_over_ρ_pressure"],
             mass_r=f["initial_conditions"].attrs["mass_r"],
             equ_radius=f["initial_conditions"].attrs["equ_radius"],
         )

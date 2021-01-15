@@ -55,12 +55,15 @@ class InternalData:
     params = attr.ib(default=attr.Factory(list))
     derivs = attr.ib(default=attr.Factory(list))
     times = attr.ib(default=attr.Factory(list))
-    a1 = attr.ib(default=attr.Factory(list))
-    a1dot = attr.ib(default=attr.Factory(list))
-    a2 = attr.ib(default=attr.Factory(list))
-    a2dot = attr.ib(default=attr.Factory(list))
-    a3 = attr.ib(default=attr.Factory(list))
-    a3dot = attr.ib(default=attr.Factory(list))
+    x1 = attr.ib(default=attr.Factory(list))
+    x1dot = attr.ib(default=attr.Factory(list))
+    x1ddot = attr.ib(default=attr.Factory(list))
+    x2 = attr.ib(default=attr.Factory(list))
+    x2dot = attr.ib(default=attr.Factory(list))
+    x2ddot = attr.ib(default=attr.Factory(list))
+    x3 = attr.ib(default=attr.Factory(list))
+    x3dot = attr.ib(default=attr.Factory(list))
+    x3ddot = attr.ib(default=attr.Factory(list))
     problems = attr.ib(default=attr.Factory(list))
 
     def _finalise(self):
@@ -76,12 +79,15 @@ class InternalData:
             self.params.shape = (0, len(ODEIndex))
 
         self.times = asarray(self.times)
-        self.a1 = asarray(self.a1)
-        self.a1dot = asarray(self.a1dot)
-        self.a2 = asarray(self.a2)
-        self.a2dot = asarray(self.a2dot)
-        self.a3 = asarray(self.a3)
-        self.a3dot = asarray(self.a3dot)
+        self.x1 = asarray(self.x1)
+        self.x1dot = asarray(self.x1dot)
+        self.x1ddot = asarray(self.x1ddot)
+        self.x2 = asarray(self.x2)
+        self.x2dot = asarray(self.x2dot)
+        self.x2ddot = asarray(self.x2ddot)
+        self.x3 = asarray(self.x3)
+        self.x3dot = asarray(self.x3dot)
+        self.x3ddot = asarray(self.x3ddot)
 
     def __add__(self, other):
         """
@@ -94,11 +100,14 @@ class InternalData:
             derivs=concatenate((self.derivs, other.derivs)),
             params=concatenate((self.params, other.params)),
             times=concatenate((self.times, other.times)),
-            a1=concatenate((self.a1, other.a1)),
-            a1dot=concatenate((self.a1dot, other.a1dot)),
-            a2=concatenate((self.a1, other.a1)),
-            a2dot=concatenate((self.a1dot, other.a1dot)),
-            a3=concatenate((self.a1, other.a1)),
-            a3dot=concatenate((self.a1dot, other.a1dot)),
+            x1=concatenate((self.x1, other.x1)),
+            x1dot=concatenate((self.x1dot, other.x1dot)),
+            x1ddot=concatenate((self.x1ddot, other.x1ddot)),
+            x2=concatenate((self.x2, other.x2)),
+            x2dot=concatenate((self.x2dot, other.x2dot)),
+            x2ddot=concatenate((self.x2ddot, other.x2ddot)),
+            x3=concatenate((self.x3, other.x3)),
+            x3dot=concatenate((self.x3dot, other.x3dot)),
+            x3ddot=concatenate((self.x3ddot, other.x3ddot)),
             problems=self.problems + other.problems,
         )
