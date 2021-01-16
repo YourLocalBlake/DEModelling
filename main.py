@@ -10,15 +10,21 @@ import matplotlib.pyplot as plt
 time_start = 0
 time_end = 5
 time_points = 1000
+max_steps = 10000
+rel_tor = 1e-4
+abs_tor = 1e-6
+enable_tstop = 0
+tstop_times = [0]
+# ONly need to specify what ones we require - others will be zero.
 initial_x1 = 1
-initial_x1dot = 1  # unused for first order DEs.
-initial_x1ddot = 0
+# initial_x1dot = 1  # unused for first order DEs.
+# initial_x1ddot = 0
 initial_x2 = 2
-initial_x2dot = 0
-initial_x2ddot = 0
+# initial_x2dot = 0
+# initial_x2ddot = 0
 initial_x3 = 3
-initial_x3dot = 0
-initial_x3ddot = 0
+# initial_x3dot = 0
+# initial_x3ddot = 0
 
 init_con = InitialConditions(
     init_x1=initial_x1,
@@ -30,23 +36,15 @@ solver_config = ConfigParams(
     start=time_start,
     stop=time_end,
     num_time=time_points,
-    max_steps = 10000,
-    relative_tolerance = 1e-4,
-    absolute_tolerance = 1e-4,
-    enable_tstop = 0,
-    tstop_times = [0]
+    max_steps= max_steps,
+    relative_tolerance= rel_tor,
+    absolute_tolerance= abs_tor,
+    enable_tstop= enable_tstop,
+    tstop_times= tstop_times
 )
-print(init_con.ode_init_con)
 
+soln, soln_t, soln_flag, internal_data = solve_model(initial_conditions=init_con, solver_config=solver_config, save_data=True, folder_name="DEModelling_test")
 
-soln, soln_t, soln_flag, internal_data = solve_model(initial_conditions=init_con, solver_config=solver_config, save_data=False, folder_name="DEModelling_test")
-
-# y_points = [i[0] for i in sol.values.y]
-# ydot_points = [i[1] for i in sol.values.y]
-#
-# plt.plot(linspace(time_start, time_end, time_points), y_points, color='red')
-# plt.plot(linspace(time_start, time_end, time_points), ydot_points, color='green')
-# plt.show()
 time = np.linspace(time_start, time_end, time_points)
 plt.plot(time, soln[:, ODEIndex.x1], label="x1", color='black')
 plt.plot(time, soln[:, ODEIndex.x2], label="x2")
