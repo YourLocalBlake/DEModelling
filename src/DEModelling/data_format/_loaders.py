@@ -12,6 +12,8 @@ def solution_loader(file_name=None):
     Returns the 4 data objects
     """
     if file_name is not None:
+        import os
+        print("cwd", os.getcwd())
         try:
             h5py.File(file_name, "r")
         except OSError:
@@ -60,9 +62,15 @@ def solution_loader(file_name=None):
         )
 
         initial_conditions = InitialConditions(
-            ode_init_con=f["initial_conditions"]["ode_initial_conditions"][:],
-            mass_r=f["initial_conditions"].attrs["mass_r"],
-            equ_radius=f["initial_conditions"].attrs["equ_radius"],
+            init_x1=f["initial_conditions"].attrs["init_x1"],
+            init_x2=f["initial_conditions"].attrs["init_x2"],
+            init_x3=f["initial_conditions"].attrs["init_x3"],
+            init_x1dot=f["initial_conditions"].attrs["init_x1dot"],
+            init_x2dot=f["initial_conditions"].attrs["init_x2dot"],
+            init_x3dot=f["initial_conditions"].attrs["init_x3dot"],
+            init_x1ddot=f["initial_conditions"].attrs["init_x1ddot"],
+            init_x2ddot=f["initial_conditions"].attrs["init_x2ddot"],
+            init_x3ddot=f["initial_conditions"].attrs["init_x3ddot"]
         )
 
     return solution, initial_conditions, config_params, internal_data

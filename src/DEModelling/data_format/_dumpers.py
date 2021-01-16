@@ -64,6 +64,16 @@ def _initial_conditions(grp, init_con, solver_config):
     """
 
     grp.create_dataset("ode_initial_conditions", data=init_con.ode_init_con)
+    grp.attrs["init_x1"] = init_con.init_x1
+    grp.attrs["init_x2"] = init_con.init_x2
+    grp.attrs["init_x3"] = init_con.init_x3
+    grp.attrs["init_x1dot"] = init_con.init_x1dot
+    grp.attrs["init_x2dot"] = init_con.init_x2dot
+    grp.attrs["init_x3dot"] = init_con.init_x3dot
+    grp.attrs["init_x1ddot"] = init_con.init_x1ddot
+    grp.attrs["init_x2ddot"] = init_con.init_x2ddot
+    grp.attrs["init_x3ddot"] = init_con.init_x3ddot
+
     if solver_config.enable_tstop:
         grp.attrs["after_tstop_params"] = str(init_con.after_tstop_params)
     else:

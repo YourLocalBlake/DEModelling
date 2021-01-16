@@ -15,7 +15,7 @@ rel_tor = 1e-4
 abs_tor = 1e-6
 enable_tstop = 0
 tstop_times = [0]
-# ONly need to specify what ones we require - others will be zero.
+# Only need to specify what ones we require - others will be zero.
 initial_x1 = 1
 # initial_x1dot = 1  # unused for first order DEs.
 # initial_x1ddot = 0
@@ -36,14 +36,14 @@ solver_config = ConfigParams(
     start=time_start,
     stop=time_end,
     num_time=time_points,
-    max_steps= max_steps,
-    relative_tolerance= rel_tor,
-    absolute_tolerance= abs_tor,
-    enable_tstop= enable_tstop,
-    tstop_times= tstop_times
+    max_steps=max_steps,
+    relative_tolerance=rel_tor,
+    absolute_tolerance=abs_tor,
+    enable_tstop=enable_tstop,
+    tstop_times=tstop_times
 )
 
-soln, soln_t, soln_flag, internal_data = solve_model(initial_conditions=init_con, solver_config=solver_config, save_data=True, folder_name="DEModelling_test")
+soln, soln_t, soln_flag, internal_data = solve_model(initial_conditions=init_con, solver_config=solver_config, save_data=False, folder_name="DEModelling_test")
 
 time = np.linspace(time_start, time_end, time_points)
 plt.plot(time, soln[:, ODEIndex.x1], label="x1", color='black')
@@ -51,3 +51,7 @@ plt.plot(time, soln[:, ODEIndex.x2], label="x2")
 plt.plot(time, soln[:, ODEIndex.x3], label="x3", color='red')
 plt.legend(loc='best')
 plt.show()
+
+# from DEModelling.data_format import solution_loader
+# a = solution_loader(file_name="DeModelling_test/TidalStability_2021-01-16--17-11")
+

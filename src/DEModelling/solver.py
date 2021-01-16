@@ -5,7 +5,6 @@ from scikits.odes import ode
 from scikits.odes.sundials import CVODESolveFailed, CVODESolveFoundRoot, CVODESolveReachedTSTOP
 
 from DEModelling.initialiser import ode_system
-from DEModelling.utils import InitConIndex
 from DEModelling.data_format import create_results_file, Solution
 
 

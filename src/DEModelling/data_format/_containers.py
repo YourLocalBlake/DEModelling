@@ -3,7 +3,9 @@ Define the data structures used.
 """
 import attr
 from numpy import asarray, concatenate
+
 from DEModelling.utils import ODEIndex
+
 
 @attr.s
 class InitialConditions:
@@ -20,7 +22,7 @@ class InitialConditions:
     init_x3 = attr.ib(default=0, type=attr.Factory(int))
     init_x3dot = attr.ib(default=0, type=attr.Factory(int))
     init_x3ddot = attr.ib(default=0, type=attr.Factory(int))
-    ode_init_con = attr.ib(init=False, default=attr.Factory(list))
+    ode_init_con = attr.ib(init=False, type=attr.Factory(list))
 
     def __attrs_post_init__(self):
         self.ode_init_con = [self.init_x1, self.init_x1dot, self.init_x1ddot, self.init_x2, self.init_x2dot,
