@@ -10,6 +10,7 @@ class InitialConditions:
     """
     Datastructure for the initial conditions of the system and ODE
     """
+    # A better way to do this is to only have the required ones and make the user initialse them all.
     init_x1 = attr.ib(default=0, type=attr.Factory(int))
     init_x1dot = attr.ib(default=0, type=attr.Factory(int))
     init_x1ddot = attr.ib(default=0, type=attr.Factory(int))
@@ -22,7 +23,9 @@ class InitialConditions:
     ode_init_con = attr.ib(init=False, default=attr.Factory(list))
 
     def __attrs_post_init__(self):
-        self.ode_init_con = [self.init_x1, self.init_x1dot, self.init_x1ddot, self.init_x2, self.init_x2dot, self.init_x2ddot, self.init_x3, self.init_x3dot, self.init_x3ddot] # Order corresponds to order of ENum.
+        self.ode_init_con = [self.init_x1, self.init_x1dot, self.init_x1ddot, self.init_x2, self.init_x2dot,
+                             self.init_x2ddot, self.init_x3, self.init_x3dot, self.init_x3ddot]
+        # Order corresponds to order of ENum.
 
 
 @attr.s

@@ -48,7 +48,7 @@ def _solution_dumper(grp, solution, solver_config):
             grp.attrs["tstop_times"] = ["No_tstops"]
     else:
         grp.attrs["tstop_times"] = ["NOT_ENABLED"]
-    if solver_config.enable_taylor_jump:
+    if False: #solver_config.enable_taylor_jump:
         try:
             grp.attrs["jump_times"] = [i.encode('utf8') for i in solution.jump_times]
         except TypeError:

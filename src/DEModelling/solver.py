@@ -17,7 +17,6 @@ def solve_model(*, initial_conditions, solver_config, save_data, folder_name):
     # Calculate the solution to the problem.
     soln, internal_data = calc_numerical_solution(initial_conditions=initial_conditions.ode_init_con, solver_config=solver_config,
                                                   time=time)
-    internal_data = [0]
     soln_y = soln.values.y
     soln_t = soln.values.t
     soln_flag = [soln.flag]
@@ -53,7 +52,7 @@ def calc_numerical_solution(*, initial_conditions, solver_config, time, tstop=0)
     Run the sundials ODE solver on the set of differential equations
     """
     # initialise the differential equation system we want to solve. This is the model we have created
-    system_to_solve = ode_system(
+    system_to_solve, internal_data = ode_system(
         store_internal_data=True
     )
 
@@ -84,6 +83,4 @@ def calc_numerical_solution(*, initial_conditions, solver_config, time, tstop=0)
     # except:  # Bare except for problems with division by zero
     #     raise SystemExit("Something went horribly wrong when trying to solve the ODE. Exiting")
 
-    internal_data = 0
-
-    return soln,  internal_data
+    return soln, internal_data
