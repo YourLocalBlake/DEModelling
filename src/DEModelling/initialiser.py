@@ -6,7 +6,8 @@ from DEModelling.data_format import InternalData
 
 from numpy import copy
 
-unsed_model = 0, 0
+unused_model = 0, 0
+
 
 def ode_system(*, store_internal_data=True):
     """
@@ -55,17 +56,23 @@ def ode_system(*, store_internal_data=True):
         deriv_x1, x1_i = model_x1_func(x1=x1)
         deriv_x2, x2_i = model_x2_func(x2=x2)
         deriv_x3, x3_i = model_x3_func(x3=x3)
-        deriv_x1dot, x1dot_i = unsed_model
-        deriv_x2dot, x2dot_i = unsed_model
-        deriv_x3dot, x3dot_i = unsed_model
-        deriv_x1ddot, x1ddot_i = unsed_model
-        deriv_x2ddot, x2ddot_i = unsed_model
-        deriv_x3ddot, x3ddot_i = unsed_model
+        deriv_x1dot, x1dot_i = unused_model
+        deriv_x2dot, x2dot_i = unused_model
+        deriv_x3dot, x3dot_i = unused_model
+        deriv_x1ddot, x1ddot_i = unused_model
+        deriv_x2ddot, x2ddot_i = unused_model
+        deriv_x3ddot, x3ddot_i = unused_model
 
         # Solve
         derivs[ODEIndex.x1] = deriv_x1
         derivs[ODEIndex.x2] = deriv_x2
         derivs[ODEIndex.x3] = deriv_x3
+        derivs[ODEIndex.x1dot] = deriv_x1dot
+        derivs[ODEIndex.x2dot] = deriv_x2dot
+        derivs[ODEIndex.x3dot] = deriv_x3dot
+        derivs[ODEIndex.x1ddot] = deriv_x1ddot
+        derivs[ODEIndex.x2ddot] = deriv_x2ddot
+        derivs[ODEIndex.x3ddot] = deriv_x3ddot
 
         if store_internal_data:
             params_list.append(copy(params))
@@ -81,10 +88,4 @@ def ode_system(*, store_internal_data=True):
             x2ddot_list.append(copy(x2ddot_i))
             x3ddot_list.append(copy(x3ddot_i))
 
-
     return rhs_equation, internal_data
-
-
-
-
-
